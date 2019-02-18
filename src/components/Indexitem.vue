@@ -1,19 +1,31 @@
 <template>
   <div class="a-item" >
-      <div class="box">
-          <img src="" alt="" class="poster">
-          <div>
-              <span class="a-name"></span>
-              <span class="a-time">time</span>
+      <div class="box-warp ">
+          <div class="box">
+            <div class="img-box">
+                <!-- <img src="../assets/test.jpg" alt="" class="poster"> -->
+            </div>
+            <div class="info">
+                <span class="a-name">{{list.title}}</span>
+                <span class="a-time">{{new Date(list.time).getFullYear()}}-{{new Date(list.time).getMonth()}}-{{new Date(list.time).getDate()}}</span>
+                <span class="a-hot">
+                    <span  class="iconfont icon-tubiao-"></span>
+                    <span> {{list.hot}}</span>
+                </span>
+
             </div>  
+          </div>
+         
       </div>
   </div>
 </template>
 
 <script>
+
+
 export default {
   name: "HelloWorld",
-//   props: ['leftnavdata',"navState"],
+  props: ['leftnavdata',"list"],
    methods: {
         hide() {
             console.log('hideNav')
@@ -24,6 +36,81 @@ export default {
 </script>
 
 <style scoped lang="less">
-   
+   .box-warp{
+      width: 10rem;
+      height: 3rem;
+      padding: .12rem;
+      box-sizing: border-box;
+      .box{
+        border: 1px solid;
+        // background: rgba(164, 77, 246, 0.9);
+        box-sizing: border-box;
+        padding: .12rem;
+        height: 100%;
+        overflow: hidden;
+        width: 100%;
+        border-radius: .3rem;
+            .img-box{
+                height: calc(2.52rem - 2px);
+                width: 50%;
+                float: left;
+                background: url() no-repeat center ;
+                background-size:cover; 
+                background-image: url('../assets/test.jpg'); 
+                border-radius: .3rem;
+            }
+            .info{
+                 height: calc(2.52rem - 2px);
+                width: 50%;
+                float: left;
+                line-height: 1.02rem;
+                font-size: .6rem;
+                .a-name{
+                    float: left;
+                    width: 100%;
+                    text-align: left;
+                    margin-left:.1rem;
+                }
+                .a-time{
+                    float: left;
+                    margin-left:.6rem;
+                    font-size: 0.3rem;
+                    line-height: 1.2rem;
+                }
+                .a-hot{
+                    float: right;
+                    font-size: 0.3rem;
+                    margin-right:.2rem;
+
+                }
+            }
+        }
+   }
+
+   .box-warp.smallsize{
+      width: 5rem ;
+      height: 3rem;
+      padding: .06rem;
+      .box{
+        padding: .06rem;
+        border-radius: .15rem;
+            .img-box{
+                height: 2.25rem;
+                border-radius: .15rem;
+            }
+            .info{
+                height: 0.51rem;
+                line-height:  0.5rem;
+                font-size: .3rem;
+                .a-name{
+                    margin-left:.5rem;
+                }
+                .a-time{
+                    margin-right:.5rem;
+                }
+            }
+        }
+   }
+
 
 </style>

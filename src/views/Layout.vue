@@ -15,13 +15,11 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 import Leftnav from "@/components/Leftnav.vue";
 
 export default {
   name: "home",
   components: {
-    HelloWorld,
     Leftnav
   },
   data() {

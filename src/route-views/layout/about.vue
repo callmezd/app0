@@ -1,8 +1,9 @@
 <template>
-  <div class="layout-about">
-   s
+  <div class="about">
+    <h1>wait...</h1>
   </div>
 </template>
+
 
 <style lang="less">
 

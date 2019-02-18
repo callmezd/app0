@@ -12,12 +12,35 @@
       </swiper-slide>
       <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
     </swiper>
+
+      <div id="sort" >
+
+         <div id="nomal-sort" data-id='nomal' ref='nomal'
+          v-bind:class="[active == 'nomal' ? 'active':'']" v-on:click="changeSortRule($event)">
+            默认
+        </div>
+
+
+        <!-- 升序 asc  降序 desc -->
+        <div id="time-sort" data-id='time' ref='time' 
+         v-bind:class="[active == 'time' ? 'active':'']" @click="changeSortRule($event)">
+            时间
+            <span v-show="activeObj.time" class="iconfont icon-paixu-shengxu" data-id='span'></span>
+            <span v-show="!activeObj.time" class="iconfont icon-paixu-jiangxu" data-id='span' ></span>
+        </div>
+
+
+        <div id="hot-sort" data-id='hot' ref='hot'
+        v-bind:class="[active == 'hot' ? 'active':'']" v-on:click="changeSortRule($event)">
+            热度
+            <span v-show="activeObj.hot" class="iconfont icon-paixu-shengxu" data-id='span'></span>
+            <span v-show="!activeObj.hot" class="iconfont icon-paixu-jiangxu" data-id='span'></span>
+        </div>
+      </div>
       <div id="itembox" v-bind:style="{height:height}">
         <scroller :on-refresh="refresh" :on-infinite="infinite"  ref="scroller">
-         
             <!-- <li v-for="(i,index) in list" v-bind:key="index">{{i}}</li> -->
-
-            <Indexitem v-for="(i,index) in list"  v-bind:option="indexItemOption" v-bind:key="index">{{i}}</Indexitem>
+              <Indexitem v-for="(i,index) in list"  v-bind:option="indexItemOption" v-bind:list="i" v-bind:key="index" />
         </scroller>
       </div>
 
@@ -52,6 +75,23 @@ import Indexitem from "@/components/Indexitem.vue";
       clickable: true
     }
   };
+
+  function sort(arr,rule,flag){
+    var t,ruleData = arr[rule];
+    for(var i=0;i<arr.length;i++){
+        for(j=i+1;j<arr.length;j++){
+            if(arr[i].ruleData>arr[j].ruleData){
+                t=arr[i];
+                arr[i]=arr[j];
+                arr[j]=t;
+            }
+        }
+    }
+    if(flag){
+      arr = arr.reverse();
+    }
+    return arr;
+  }
   export default {
     name: "layout-index",
     components: {
@@ -84,54 +124,77 @@ import Indexitem from "@/components/Indexitem.vue";
           }
         ],
         list: [
-          "JSON书写格式",
-          "json解密",
-          
+          {title:'标题1',time:1448518400000,hot:1},         
+          {title:'标题2',time:1455555500000,hot:122},         
+          {title:'标题3',time:1498518400000,hot:70},         
+          {title:'标题4',time:1558518400000,hot:50},         
         ],
+        indexItemOption:{
+          type:0
+        },
         adSwiperOption,
         swiperOption,
         height: 0,
-        noData: ''
+        noData: '',
+        active:"nomal",
+        activeObj:{
+          'time': false,
+          'hot': false,
+        }
       }
     },
     created() {
       this.height = ((document.documentElement.clientHeight / document.documentElement.clientWidth) *
-        10 - 3.5 - .9) + 'rem';
+        10 - 3.5 - .9  -.8) + 'rem';
     },
     methods: {
+      rand(a,b){
+          var w = b-a;
+          return   parseInt(Math.random()*w+a , 10);
+      },
       infinite(done) {
         // 没有数据的处理
         if (this.noData) {
-          setTimeout(()=>{
-              this.$refs.scroller.finishInfinite(2);
-          })
+            setTimeout(()=>{
+                this.$refs.scroller.finishInfinite(2);
+            })
           }else{
-          let self = this; //this指向问题
-          let start = this.list.length;
-
-          setTimeout(() => {
-            for (let i = start + 1; i < start + 10; i++) {
-              self.list.push(i)
-            }
-            console.log(start)
-            if (start > 30) {
-              self.noData = "没有更多数据"
-            }
-            done()
-          }, 1500)
+            let self = this; //this指向问题
+            let start = this.list.length;
+            setTimeout(() => {
+              for (let i = start + 1; i < start + 17; i++) {
+                var time = this.rand(1558518400000,1598518400000);
+                var hot = this.rand(155,10000);
+                var anews = {title:'标题'+i,time:time,hot:hot};   
+                self.list.push(anews);
+              }
+              console.log(start)
+              if (start > 110) {
+                self.noData = "没有更多数据"
+              }
+              done();
+            }, 1500)
         }
       },
       refresh() {
         let start = 100;
         let list = [];
-         for (let i = start + 1; i < start + 20; i++) {
-              list.push(i+'刷新')
-         }
-         setTimeout(()=>{
+        console.log("刷新")
+        //  for (let i = start + 1; i < start + 20; i++) {
+        //       list.push(i+'刷新')
+        //  }
+        //  setTimeout(()=>{
 
-           this.list = list;
-            this.$refs.scroller.resize();
-         },500)
+        //    this.list = list;
+        //     this.$refs.scroller.resize();
+        //  },500)
+      },
+      changeSortRule(e){
+        console.log(e.currentTarget)
+        e.cancelBubble = true;
+        var id = e.currentTarget.dataset.id
+        this.active = id;
+        this.activeObj[id] = !this.activeObj[id];
       }
     }
   };
@@ -166,6 +229,8 @@ import Indexitem from "@/components/Indexitem.vue";
     position : relative;
   }
 
+ 
+
   ul li {
     text-align: left;
     font-size: 0.6rem;
@@ -176,4 +241,23 @@ import Indexitem from "@/components/Indexitem.vue";
     width: 9.4rem;
     margin:.3rem;
   }
+
+
+ #sort{
+    height: .8rem;
+    background: rgba(32, 115, 148, 0.6);
+    color: white;
+    div{
+      width: 3.3333rem;
+      height: .8rem;
+      line-height: .8rem;
+      float: left;
+    }
+    div.active{
+      color: red;
+    }
+    
+  }
+ 
+
 </style>

@@ -12,16 +12,21 @@
       </swiper-slide>
       <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
     </swiper>
-      <ul v-bind:style="{height:height}">
-    <scroller :on-refresh="refresh" :on-infinite="infinite"  ref="scroller">
-        <li v-for="(i,index) in list" v-bind:key="index">{{i}}</li>
-    </scroller>
-      </ul>
+      <div id="itembox" v-bind:style="{height:height}">
+        <scroller :on-refresh="refresh" :on-infinite="infinite"  ref="scroller">
+         
+            <!-- <li v-for="(i,index) in list" v-bind:key="index">{{i}}</li> -->
+
+            <Indexitem v-for="(i,index) in list"  v-bind:option="indexItemOption" v-bind:key="index">{{i}}</Indexitem>
+        </scroller>
+      </div>
 
   </div>
 </template>
 
 <script>
+import Indexitem from "@/components/Indexitem.vue";
+
   import {
     swiper,
     swiperSlide,
@@ -51,7 +56,8 @@
     name: "layout-index",
     components: {
       swiper,
-      swiperSlide
+      swiperSlide,
+      Indexitem
     },
     data() {
       return {
@@ -80,34 +86,7 @@
         list: [
           "JSON书写格式",
           "json解密",
-          "json文件解密工具下载",
-          "json文件怎么打开",
-          "json的几种数据格式",
-          "json格式化工具",
-          "json格式化",
-          "json格式转换",
-          "java json删除key",
-          "json正则表达式",
-          "json文件解密",
-          "ttf转json",
-          "图片转json",
-          "json格式图片",
-          "json字段丢失",
-          "json转换txt",
-          "json转换",
-          "ultraedit格式化json",
-          "安卓json编辑器",
-          "手机json格式怎么打开",
-          "标准json数据格式",
-          "json在线格式化",
-          "json格式转换txt",
-          "json怎么用",
-          "json解析在线",
-          "json文件怎么解密",
-          "java如何json删除key",
-          "json加密解密",
-          "python格式化json",
-          "json数据替换图片"
+          
         ],
         adSwiperOption,
         swiperOption,
@@ -179,7 +158,7 @@
     height : 0.5rem;
   }
 
-  ul {
+  #itembox {
     height : 5rem;
     overflow : auto;
     width : 100%;

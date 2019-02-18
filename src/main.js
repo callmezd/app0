@@ -3,7 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import 'lib-flexible/flexible.js' ;
 import './style/base.less';
+import './style/icon/iconfont.css';
+
+
 import 'swiper/dist/css/swiper.css';
+
 import VueScroller from 'vue-scroller'
 
 

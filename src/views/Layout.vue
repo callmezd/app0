@@ -1,31 +1,8 @@
 <template>
   <div class="home page">
-    <div id="left-route"  v-bind:class="{run:run}">
-      <div id="left-main">
-        <div id="glass" v-on:click="run=false" >
-
-        </div>
-        
-
-        <div id="meau"> 
-          <transition name="fade">
-            <img class="head" src="../../public/head.jpg" alt="">
-         </transition>
-        <div id="list">
-
-
-          <li v-for="(item,index) in mymeaulist" v-bind:key="index">
-            {{item.name}}
-          </li>
-
-          
-        </div>
-        </div>
-   
-      </div>      
-    </div>
+    <Leftnav v-bind:leftnavdata="leftnavdata" v-bind:navState="navState" v-on:hideNav='hideNav'/>
     <div id="head-box">
-       <img class="head" src="../../public/head.jpg" alt="" v-on:click="run=true" >
+       <img class="head" src="../../public/head.jpg" alt="" v-on:click="navState=!navState" >
     </div>
     <div id="nav">
       <router-link to="/layout/index">Home</router-link> |
@@ -39,40 +16,47 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import Leftnav from "@/components/Leftnav.vue";
 
 export default {
   name: "home",
   components: {
-    HelloWorld
+    HelloWorld,
+    Leftnav
   },
   data() {
     return {
       run:false,
+      navState:false,
       mymeaulist:[
         { name: '我的关注',url: '' },
         { name:'我的收藏',url: ' '}
+      ],
+      leftnavdata:{
+        userInfo:{nick:'nick',headImg:require('../../public/head.jpg')},
+        allNav:[
+         {desc:'base',name:'base',navList: [{name:'我的收藏',icon:'iconfont icon-shoucang'},{name:'我的赞',icon:'iconfont icon-zan'}]},
+         {desc:'hot',name:'hot',navList: [{name:'热点1',icon:'iconfont icon-tubiao-'},{name:'新闻',icon:'iconfont icon-xinwen'}]},
+         {desc:'user',name:'user',navList: [{name:'自定义1',icon:'iconfont icon-zidingyi'},{name:'自定义2',icon:'iconfont icon-zidingyi'}]},
         ]
       }
-  }
+    }
+  },
+  methods: {
+    hideNav(){
+      this.navState = false;
+    }
+  },
 };
 </script>
 
 <style lang="less">
-#left-route {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  border: 1px solid;
-  box-sizing: border-box;
-  z-index: 3;
-  left: -10rem;
-  background: rgba(0, 0, 0, 0.3);
-}
 
 .run {
-  animation: ss 0.6s ease-in-out;
+  animation: ss 0.3s ease-in-out;
   animation-fill-mode: forwards;
 }
+
 
 #left-main {
   height: 100%;

@@ -6,6 +6,7 @@ import layoutIndex from "./route-views/layout/index.vue";
 import layoutMine from "./route-views/layout/mine.vue";
 import layoutAbout from "./route-views/layout/about.vue";
 import Notfind from "./views/Notfind.vue";
+import Detail from "./views/Detail.vue";
 
 
 
@@ -46,15 +47,21 @@ export default new Router({
           component: layoutAbout
         }
       ]
-    },{
+    },
+    {
+      path: "/detail",
+      name: "detail",
+      component: Detail
+  },
+    {
         path: "/not-find",
         name: "not-find",
         component: Notfind
-      },
-      ,{
+    },
+    {
         path: "*",
         redirect: "/not-find"
-      }
+    }
 
     // {
     //   path: "/",

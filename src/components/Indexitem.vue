@@ -1,5 +1,6 @@
 <template>
   <div class="a-item" >
+      <router-link to='/detail'>
       <div class="box-warp ">
           <div class="box">
             <div class="img-box">
@@ -17,6 +18,7 @@
           </div>
          
       </div>
+      </router-link>
   </div>
 </template>
 

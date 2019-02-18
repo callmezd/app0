@@ -9,7 +9,10 @@
       <router-link to="/layout/mine">mine</router-link> |
       <router-link to="/layout/about">About</router-link>
     </div>
-    <router-view/>
+
+    <transition name="bounce">
+        <router-view />
+    </transition>
   </div>
 </template>
 
@@ -26,10 +29,6 @@ export default {
     return {
       run:false,
       navState:false,
-      mymeaulist:[
-        { name: '我的关注',url: '' },
-        { name:'我的收藏',url: ' '}
-      ],
       leftnavdata:{
         userInfo:{nick:'nick',headImg:require('../../public/head.jpg')},
         allNav:[

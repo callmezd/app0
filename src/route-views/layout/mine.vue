@@ -1,6 +1,11 @@
 <template>
   <div class="layout-mine">
-
+    <p>测试</p>
+    <p>测试</p>
+    <p>测试</p>
+    <p>测试</p>
+    <p>测试</p>
+    <p>测试</p>
   </div>
 </template>
 

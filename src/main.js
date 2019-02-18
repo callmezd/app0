@@ -4,6 +4,7 @@ import router from "./router";
 import 'lib-flexible/flexible.js' ;
 import './style/base.less';
 import './style/icon/iconfont.css';
+import './style/animate.css';
 
 
 import 'swiper/dist/css/swiper.css';

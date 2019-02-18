@@ -20,7 +20,6 @@
             默认
         </div>
 
-
         <!-- 升序 asc  降序 desc -->
         <div id="time-sort" data-id='time' ref='time' 
          v-bind:class="[active == 'time' ? 'active':'']" @click="changeSortRule($event)">
@@ -28,7 +27,6 @@
             <span v-show="activeObj.time" class="iconfont icon-paixu-shengxu" data-id='span'></span>
             <span v-show="!activeObj.time" class="iconfont icon-paixu-jiangxu" data-id='span' ></span>
         </div>
-
 
         <div id="hot-sort" data-id='hot' ref='hot'
         v-bind:class="[active == 'hot' ? 'active':'']" v-on:click="changeSortRule($event)">
@@ -38,10 +36,14 @@
         </div>
       </div>
       <div id="itembox" v-bind:style="{height:height}">
-        <scroller :on-refresh="refresh" :on-infinite="infinite"  ref="scroller">
-            <!-- <li v-for="(i,index) in list" v-bind:key="index">{{i}}</li> -->
+ 
+
+       <scroller :on-refresh="refresh" :on-infinite="infinite"  ref="scroller">
               <Indexitem v-for="(i,index) in list"  v-bind:option="indexItemOption" v-bind:list="i" v-bind:key="index" />
         </scroller>
+
+       
+
       </div>
 
   </div>
@@ -77,20 +79,7 @@ import Indexitem from "@/components/Indexitem.vue";
   };
 
   function sort(arr,rule,flag){
-    var t,ruleData = arr[rule];
-    for(var i=0;i<arr.length;i++){
-        for(j=i+1;j<arr.length;j++){
-            if(arr[i].ruleData>arr[j].ruleData){
-                t=arr[i];
-                arr[i]=arr[j];
-                arr[j]=t;
-            }
-        }
-    }
-    if(flag){
-      arr = arr.reverse();
-    }
-    return arr;
+ 
   }
   export default {
     name: "layout-index",
@@ -124,10 +113,10 @@ import Indexitem from "@/components/Indexitem.vue";
           }
         ],
         list: [
-          {title:'标题1',time:1448518400000,hot:1},         
-          {title:'标题2',time:1455555500000,hot:122},         
-          {title:'标题3',time:1498518400000,hot:70},         
-          {title:'标题4',time:1558518400000,hot:50},         
+          {title:'标题1',time:1448518400000,hot:1,id:0},
+          {title:'标题2',time:1455555500000,hot:122,id:1},
+          {title:'标题3',time:1498518400000,hot:70,id:2},
+          {title:'标题4',time:1558518400000,hot:50,id:3},
         ],
         indexItemOption:{
           type:0
@@ -190,11 +179,11 @@ import Indexitem from "@/components/Indexitem.vue";
         //  },500)
       },
       changeSortRule(e){
-        console.log(e.currentTarget)
         e.cancelBubble = true;
         var id = e.currentTarget.dataset.id
         this.active = id;
         this.activeObj[id] = !this.activeObj[id];
+        // this.list = sort(this.list,id,this.activeObj[id]);
       }
     }
   };

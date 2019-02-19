@@ -58,7 +58,8 @@ export default {
                 float: left;
                 background: url() no-repeat center ;
                 background-size:cover; 
-                background-image: url('../assets/test.jpg'); 
+                // background-image: url('../assets/test.jpg'); 
+                background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550568292600&di=58179cf3a2765466377b23af21f8508f&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F019e585975a5f8a8012193a35466ef.jpg'); 
                 border-radius: .3rem;
             }
             .info{

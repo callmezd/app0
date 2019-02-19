@@ -5,14 +5,15 @@
         <p>{{item}}</p>
       </swiper-slide>
     </swiper>
-
+  
     <swiper :options="swiperOption" class="banner-swiper-slide">
-      <swiper-slide v-for="(item,index) in slideImages" v-bind:key="index">
+      <swiper-slide v-for="(item,index) in banner" v-bind:key="index">
         <img :src="item.imageUrl">
       </swiper-slide>
       <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
     </swiper>
-
+  <p>
+  </p>
       <div id="sort" >
 
          <div id="nomal-sort" data-id='nomal' ref='nomal'
@@ -51,6 +52,7 @@
 
 <script>
 import Indexitem from "@/components/Indexitem.vue";
+import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
 
   import {
     swiper,
@@ -88,36 +90,21 @@ import Indexitem from "@/components/Indexitem.vue";
       swiperSlide,
       Indexitem
     },
+    mounted(){
+      console.log(this)
+    },
+    computed: {
+      ...mapState({
+          list: state => state.list.list,
+          banner: state => state.banner.banner,
+      })
+    },
+  
     data() {
       return {
+        // banner:[0],
         ads: ["广告1", "广告2", "广告3", "广告4"],
-        slideImages: [{
-            imageUrl: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3708759485,2703464663&fm=26&gp=0.jpg",
-            title: "y",
-            name: ""
-          },
-          {
-            imageUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2695047413,3283828312&fm=26&gp=0.jpg",
-            title: "y",
-            name: ""
-          },
-          {
-            imageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550147776228&di=717914dc28349f5a34c21f18d4bb65a3&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01cdc1592fac02a8012193a36a9fab.jpg%401280w_1l_2o_100sh.jpg",
-            title: "y",
-            name: ""
-          },
-          {
-            imageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550147776228&di=6479f67eeead4f9b74c5fc208edf7f8e&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F3522d49a0c889fef7859745baf89a8d8880c5c54f6e0-vu5doF_fw658",
-            title: "y",
-            name: ""
-          }
-        ],
-        list: [
-          {title:'标题1',time:1448518400000,hot:1,id:0},
-          {title:'标题2',time:1455555500000,hot:122,id:1},
-          {title:'标题3',time:1498518400000,hot:70,id:2},
-          {title:'标题4',time:1558518400000,hot:50,id:3},
-        ],
+        slideImages: [],
         indexItemOption:{
           type:0
         },
@@ -135,11 +122,16 @@ import Indexitem from "@/components/Indexitem.vue";
     created() {
       this.height = ((document.documentElement.clientHeight / document.documentElement.clientWidth) *
         10 - 3.5 - .9  -.8) + 'rem';
+        console.log(this.$store.dispatch(''));
+
     },
     methods: {
+      // ...mapActions(['invokePushList']),
+      ...mapActions({invokePushList:'invokePushList'}),
+
       rand(a,b){
           var w = b-a;
-          return   parseInt(Math.random()*w+a , 10);
+          return parseInt(Math.random()*w+a , 10);
       },
       infinite(done) {
         // 没有数据的处理
@@ -155,9 +147,12 @@ import Indexitem from "@/components/Indexitem.vue";
                 var time = this.rand(1558518400000,1598518400000);
                 var hot = this.rand(155,10000);
                 var anews = {title:'标题'+i,time:time,hot:hot};   
-                self.list.push(anews);
+                // self.list.push(anews);
+                console.log(self.$store.dispatch('invokePushList'))
+
+                self.$store.dispatch('invokePushList',anews);
+                // self.invokePushList(anews);
               }
-              console.log(start)
               if (start > 110) {
                 self.noData = "没有更多数据"
               }

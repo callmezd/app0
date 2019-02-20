@@ -2,8 +2,8 @@
   <div class="detail">
     <div class="top-nav">
          <div @click='backLastRoute' class="back-warp" to='/'> <span class="iconfont icon-back"></span></div>
-         <div class="title">
-           name
+         <div class="title" >
+           {{list[this.$route.query.id].title}}
          </div>
     </div>
   </div>
@@ -11,15 +11,26 @@
 
 <script>
 // @ is an alias to /src
+import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
 
 export default {
   name: "mine",
   components: {
   },
+  computed:{
+    ...mapState('list', {
+      list: state => state.list,
+    }),
+  },
+  mounted(){
+  },
+  watch:{
+  },
   methods: {
     backLastRoute(){
       this.$router.back(-1)
-    }
+    },
+   
   },
 };
 </script>

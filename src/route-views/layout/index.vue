@@ -37,12 +37,10 @@
         </div>
       </div>
       <div id="itembox" v-bind:style="{height:height}">
- 
 
        <scroller :on-refresh="refresh" :on-infinite="infinite"  ref="scroller">
-              <Indexitem v-for="(i,index) in list"  v-bind:option="indexItemOption" v-bind:list="i" v-bind:key="index" />
-        </scroller>
-
+          <Indexitem v-for="(i,index) in list"   v-bind:myindex="index" v-bind:list="i" v-bind:key="index" />
+       </scroller>
        
 
       </div>
@@ -52,7 +50,8 @@
 
 <script>
 import Indexitem from "@/components/Indexitem.vue";
-import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
+import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
+import {jsonp} from 'vue'; //先要引入
 
   import {
     swiper,
@@ -60,29 +59,6 @@ import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
     scroller
   } from "vue-awesome-swiper";
 
-  let adSwiperOption = {
-    loop: true,
-    autoplay: {
-      delay: 10000,
-      disableOnInteraction: false
-    },
-  };
-
-  let swiperOption = {
-    loop: true,
-    autoplay: {
-      delay: 10000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true
-    }
-  };
-
-  function sort(arr,rule,flag){
- 
-  }
   export default {
     name: "layout-index",
     components: {
@@ -90,26 +66,39 @@ import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
       swiperSlide,
       Indexitem
     },
-    mounted(){
-      console.log(this)
-    },
     computed: {
-      ...mapState({
-          list: state => state.list.list,
-          banner: state => state.banner.banner,
+      // 方式一
+      // ...mapState({
+      //     banner: state => state.list.banner,
+      //     list: state => state.list.list,
+      //     adSwiperOption: state => state.data.adSwiperOption,
+      //     swiperOption: state => state.data.swiperOption,
+      // })
+      // ...mapState({
+      //     banner: state => state.list.banner,
+      //     list: state => state.list.list,
+      //     adSwiperOption: state => state.data.adSwiperOption,
+      //     swiperOption: state => state.data.swiperOption,
+      // }),
+
+      // 方式二
+       ...mapState('list', {
+          banner: state => state.banner,
+          list: state => state.list,
+        }),
+      ...mapState('data', {
+          adSwiperOption: state => state.adSwiperOption,
+          swiperOption: state => state.swiperOption,
       })
+
     },
-  
     data() {
       return {
-        // banner:[0],
         ads: ["广告1", "广告2", "广告3", "广告4"],
         slideImages: [],
         indexItemOption:{
           type:0
         },
-        adSwiperOption,
-        swiperOption,
         height: 0,
         noData: '',
         active:"nomal",
@@ -122,13 +111,12 @@ import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
     created() {
       this.height = ((document.documentElement.clientHeight / document.documentElement.clientWidth) *
         10 - 3.5 - .9  -.8) + 'rem';
-        console.log(this.$store.dispatch(''));
+         this.$store.dispatch('SHOW');
 
+          this.getList();
     },
     methods: {
-      // ...mapActions(['invokePushList']),
-      ...mapActions({invokePushList:'invokePushList'}),
-
+      ...mapActions(["pushlist"]),
       rand(a,b){
           var w = b-a;
           return parseInt(Math.random()*w+a , 10);
@@ -146,12 +134,8 @@ import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
               for (let i = start + 1; i < start + 17; i++) {
                 var time = this.rand(1558518400000,1598518400000);
                 var hot = this.rand(155,10000);
-                var anews = {title:'标题'+i,time:time,hot:hot};   
-                // self.list.push(anews);
-                console.log(self.$store.dispatch('invokePushList'))
-
-                self.$store.dispatch('invokePushList',anews);
-                // self.invokePushList(anews);
+                var anews = {title:'标题'+i,time:time,hot:hot,id:new Date().getTime()};   
+                this.$store.dispatch('pushlist',anews);
               }
               if (start > 110) {
                 self.noData = "没有更多数据"
@@ -163,7 +147,6 @@ import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
       refresh() {
         let start = 100;
         let list = [];
-        console.log("刷新")
         //  for (let i = start + 1; i < start + 20; i++) {
         //       list.push(i+'刷新')
         //  }
@@ -179,6 +162,8 @@ import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
         this.active = id;
         this.activeObj[id] = !this.activeObj[id];
         // this.list = sort(this.list,id,this.activeObj[id]);
+      },
+       getList: function () {
       }
     }
   };
@@ -245,3 +230,7 @@ import {mapGetters,mapState,mapActions} from 'vuex'; //先要引入
  
 
 </style>
+
+
+
+

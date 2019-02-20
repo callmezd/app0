@@ -1,6 +1,8 @@
 <template>
   <div class="a-item" >
-      <router-link to='/detail'>
+
+      
+      <router-link  :to="{name:'detail',query:{id:myindex}}">
       <div class="box-warp ">
           <div class="box">
             <div class="img-box">
@@ -12,6 +14,7 @@
                 <span class="a-hot">
                     <span  class="iconfont icon-tubiao-"></span>
                     <span> {{list.hot}}</span>
+                    <span style="color:red"> {{myindex}}</span>
                 </span>
 
             </div>  
@@ -27,7 +30,9 @@
 
 export default {
   name: "HelloWorld",
-  props: ['leftnavdata',"list"],
+  props: ["list",'myindex'],
+  mounted(){
+  },
    methods: {
         hide() {
             console.log('hideNav')

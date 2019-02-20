@@ -18,7 +18,12 @@ import './style/animate.css';
 import 'swiper/dist/css/swiper.css';
 
 // vuex
-import store from './store/index.js';//引入store
+import store from './vuex/store.js';
+
+
+import jsonp from 'jsonp'
+
+
 
 
 
@@ -28,11 +33,14 @@ Vue.use(VueAwesomeSwiper);
 
 Vue.use(VueScroller);
 
-Vue.use(VueAxios,axios);
+Vue.use(VueAxios,axios,jsonp);
 
 Vue.config.productionTip = false;
+
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
+
+

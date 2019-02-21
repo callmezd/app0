@@ -3,14 +3,25 @@
     <div class="top-nav">
          <div @click='backLastRoute' class="back-warp" to='/'> <span class="iconfont icon-back"></span></div>
          <div class="title" >
-           {{list[this.$route.query.id].title}}
+           <!-- {{list[this.$route.query.id].title}} -->
          </div>
+    </div>
+
+    <div class="main">
+
+      <div v-if="list[this.$route.query.id]" >
+        <div v-for="(item,index) in list[this.$route.query.id].content" v-bind:key = "index">
+          <p>{{item}}</p>        
+            <img src="http://www.si27.com/wp-content/uploads/2015/12/2016.jpg" alt="">        
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+// @ is an alias to /src params
 import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
 
 export default {
@@ -23,6 +34,7 @@ export default {
     }),
   },
   mounted(){
+    console.log(this.$store.state.list)
   },
   watch:{
   },
@@ -61,4 +73,13 @@ export default {
       color: aliceblue;
     }
   }
+  .detail{
+    height: calc(100%);
+    .main{
+      height: calc(100% - 1rem);
+      width: 100%;
+      overflow-y: auto;
+    }
+  }
+ 
 </style>

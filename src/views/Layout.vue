@@ -10,9 +10,11 @@
       <router-link to="/layout/about">About</router-link>
     </div>
 
-    <transition name="bounce">
-        <router-view />
-    </transition>
+      <transition name="bounce"  mode="in-out">
+        <keep-alive>
+          <router-view />
+        </keep-alive>
+      </transition>
   </div>
 </template>
 

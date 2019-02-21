@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-
-        <transition name="fade">
-               <router-view />
-        </transition>
-
- 
+       <transition name="fade"  mode="in-out">
+        <keep-alive>
+          <router-view />
+        </keep-alive>
+      </transition>
   </div>
 </template>
 
@@ -14,7 +13,6 @@
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   overflow: hidden;
 }

@@ -25,40 +25,77 @@ const list = [{
         title: '标题1',
         time: 1448518400000,
         hot: 1,
-        id: 0
+        id: 0,
+        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
     },
     {
         title: '标题2',
         time: 1455555500000,
         hot: 122,
-        id: 1
+        id: 1,
+        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
     },
     {
         title: '标题3',
         time: 1498518400000,
         hot: 70,
-        id: 2
+        id: 2,
+        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
     },
     {
         title: '标题4',
         time: 1558518400000,
         hot: 50,
-        id: 3
+        id: 3,
+        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
+    }
+];
+
+const lastList = [{
+        title: '标题1',
+        time: 1448518400000,
+        hot: 1,
+        id: 0,
+        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
+    },
+    {
+        title: '标题2',
+        time: 1455555500000,
+        hot: 122,
+        id: 1,
+        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
+    },
+    {
+        title: '标题3',
+        time: 1498518400000,
+        hot: 70,
+        id: 2,
+        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
+    },
+    {
+        title: '标题4',
+        time: 1558518400000,
+        hot: 50,
+        id: 3,
+        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
     }
 ];
 
 
 const state = {
     banner,
-    list
+    list: list
 };
 
 const mutations = {
     SHOW(state, items) {
-        console.log("show");
+        // console.log("show");
     },
     PUSHLIST(state, items) {
         state.list.push(items);
+    },
+    RESESTLIST(state) {
+        state.list = lastList;
     }
 };
 

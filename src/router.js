@@ -8,6 +8,8 @@ import layoutAbout from "./views/route-views/layout/about.vue";
 
 import Notfind from "./views/Notfind.vue";
 import Detail from "./views/Detail.vue";
+import Loading from "./views/Loading.vue";
+import register from "./views/register.vue";
 
 
 Vue.use(Router);
@@ -16,11 +18,12 @@ Vue.use(Router);
 
 
  const router = new Router({
-  // vue-router.esm.js？8c4f:16[Vue Router]命名路由“layout”具有默认子路由。导航到此命名路由（：to=“name:'layout'”）时，将不会呈现默认的子路由。删除此路由的名称，并将默认子路由的名称用于命名链接。
   mode: "history", // history
   base: process.env.BASE_URL,
   routes: [
-    { path:'/',redirect:"/layout"},
+    { path:'/',redirect:"/register"},
+    { path:'/register',name:"register",component:register},
+    { path:'/loading',name:"loading",component:Loading},
     {
       path: "/layout",
       name: "",

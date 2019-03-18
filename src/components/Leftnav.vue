@@ -1,5 +1,6 @@
 <template>
-  <div id="left-nav-page"   v-bind:class="[navState?'run':'']">
+  <!-- <div id="left-nav-page"   v-bind:class="[navState?'run':'']"> -->
+  <div id="left-nav-page" >
         <div id="nav-glass" v-on:click="hide" >
           <p>
         {{navState?1:0}}
@@ -43,7 +44,7 @@ export default {
         width: 100%;
         position: absolute;
         z-index: 3;
-        left: -10rem;
+        // left: -10rem;
         background: rgba(0, 0, 0, 0.3);
     }
 

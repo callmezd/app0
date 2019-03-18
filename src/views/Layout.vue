@@ -1,8 +1,19 @@
 <template>
   <div class="home page">
-    <Leftnav v-bind:leftnavdata="leftnavdata" v-bind:navState="navState" v-on:hideNav='hideNav'/>
+    <transition name="left">
+        <keep-alive>
+          <Leftnav v-if="navState" v-bind:leftnavdata="leftnavdata" v-bind:navState="navState" v-on:hideNav='hideNav'/>
+        </keep-alive>
+    </transition>
     <div id="head-box">
        <img class="head" src="../../public/head.jpg" alt="" v-on:click="navState=!navState" >
+       <span style=" position: absolute;
+    z-index: 3;
+    top: 1%;
+    right: 7%;
+    color: white;">
+         {{navState}}
+         </span>
     </div>
     <div id="nav">
       <router-link to="/layout/index">Home</router-link> |
@@ -21,6 +32,11 @@
 <script>
 // @ is an alias to /src
 import Leftnav from "@/components/Leftnav.vue";
+import axios from "axios";
+import untils from "../untils/index.js";
+
+ 
+
 
 export default {
   name: "home",
@@ -46,6 +62,12 @@ export default {
       this.navState = false;
     }
   },
+  mounted () {
+    untils.ajax("test0",{
+          type:"test0"
+    },function(e){
+    });
+  }
 };
 </script>
 

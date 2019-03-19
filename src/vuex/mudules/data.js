@@ -6,18 +6,17 @@ let adSwiperOption = {
     },
   };
 
-  let swiperOption = {
-    loop: true,
-    autoplay: {
-      delay: 10000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true
-    }
-  };
-
+let swiperOption = {
+  loop: true,
+  autoplay: {
+    delay: 10000,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true
+  }
+};
 
 
   

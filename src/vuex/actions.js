@@ -11,3 +11,5 @@ function makeAction (type) {
 export const SHOW = makeAction(types.SHOW);
 export const pushlist = makeAction(types.PUSHLIST);
 export const resetlist = makeAction(types.RESESTLIST);
+export const SHOWAlERT = makeAction(types.SHOWAlERT);
+export const HIDEAELRT = makeAction(types.HIDEAELRT);

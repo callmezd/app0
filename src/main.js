@@ -11,21 +11,12 @@ import VueAxios from 'vue-axios';
 //滑动组件
 import VueScroller from 'vue-scroller';
 
-
 // CSS
 import './style/icon/iconfont.css';
 import './style/animate.css';
 import 'swiper/dist/css/swiper.css';
-
 // vuex
 import store from './vuex/store.js';
-
-
-import jsonp from 'jsonp'
-
-
-
-
 
 var VueAwesomeSwiper = require('vue-awesome-swiper');
 
@@ -33,7 +24,7 @@ Vue.use(VueAwesomeSwiper);
 
 Vue.use(VueScroller);
 
-Vue.use(VueAxios,axios,jsonp);
+Vue.use(VueAxios,axios);
 
 Vue.config.productionTip = false;
 

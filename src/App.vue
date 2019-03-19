@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+      <alert :msg="msg" />
        <transition name="fade"  mode="in-out">
         <keep-alive>
           <router-view />
@@ -7,6 +8,23 @@
       </transition>
   </div>
 </template>
+
+
+<script>
+  import alert from "@/components/alert.vue";
+  export default {
+    data(){
+      return {
+        msg:"请撒大声地是多少是的"
+      }
+    },
+    components: {
+      alert
+    }
+  };
+
+
+</script>
 
 <style lang="less">
 #app {

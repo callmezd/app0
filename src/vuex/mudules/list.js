@@ -84,8 +84,10 @@ const lastList = [{
 
 const state = {
     banner,
-    list: list
+    list
 };
+
+
 
 const mutations = {
     SHOW(state, items) {

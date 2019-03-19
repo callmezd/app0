@@ -33,10 +33,7 @@
 // @ is an alias to /src
 import Leftnav from "@/components/Leftnav.vue";
 import axios from "axios";
-import untils from "../untils/index.js";
-
- 
-
+import untils from "../utils/index.js";
 
 export default {
   name: "home",
@@ -64,8 +61,9 @@ export default {
   },
   mounted () {
     untils.ajax("test0",{
-          type:"test0"
+      type:"test0"
     },function(e){
+
     });
   }
 };

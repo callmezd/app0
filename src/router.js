@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Layout from "./views/Layout.vue";
 
-import layoutIndex from "./views/route-views/layout/index.vue";
+import layoutIndex from "./views/route-views/layout/index1.vue";
 import layoutMine from "./views/route-views/layout/mine.vue";
 import layoutAbout from "./views/route-views/layout/about.vue";
 

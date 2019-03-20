@@ -1,11 +1,11 @@
 <template>
 
-  <div class="page  alert-page">
+  <div class="page  alert-page" v-show = "alertShow">
     <div class="alert" >
       <div id="msgbox">
-        <p>{{msg}}</p>
+        <p>{{alertMsg}}</p>
       </div>
-        <div class="btn">确定</div>
+        <div class="btn" @click="hide"> 确定</div>
     </div>
   </div>
 </template>
@@ -13,22 +13,33 @@
 <script lang="ts">
 
 import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
+import { mapMutations } from 'vuex'
 
 export default {
   name: "alert",
   computed:{
-   
-
-
+    // ...mapState('alert', {
+    //   alertShow: state => state.alert,
+    // })
+      ...mapState({
+          alertShow: state => state.alert.alertShow,
+          alertMsg: state => state.alert.alertMsg,
+      })
   },
   props: {
-    msg: String
   },
   mounted(){
 
+  },
+  methods: {
+    hide(){
+      // this.$store.dispatch('hideAlert');
+      this.$store.commit('alert/HIDEAELRT')
+    },
+     ...mapMutations([
+      'alert/HIDEAELRT' 
+    ])
   }
-
-
 };
 </script>
 

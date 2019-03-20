@@ -1,6 +1,8 @@
 <template>
   <div class="not-find">
-    404
+      <h2>404 NOTFIND</h2>
+      <p>页面被吃了...</p>
+      <router-link to="/">返回首页</router-link>
   </div>
 </template>
 
@@ -11,7 +13,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 export default {
   name: "mine",
   components: {
-    HelloWorld
+    // HelloWorld
   }
 };
 </script>

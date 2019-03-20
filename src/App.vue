@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <alert :msg="msg" />
+      <alert/>
        <transition name="fade"  mode="in-out">
         <keep-alive>
           <router-view />

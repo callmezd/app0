@@ -1,23 +1,29 @@
 
 
-let alertShow = 1111;
+let alertShow = true;
+
+let alertMsg = "默认消息";
 
 const state = {
-    alertShow
+    alertShow,
+    alertMsg
 };
 
-const mutations = {
-    SHOWAlERT(){
-        state.alertShow = true;
-    },
-    HIDEAELRT(){
-        state.alertShow = false;
-    }
-}
+
+// const mutations = {
+//     SHOWAlERT(MSG){
+//         console.log(MSG)
+//         console.log(2222)
+//         state.alert = true;
+//     },
+//     HIDEAELRT(){
+//         state.alert = false;
+//     }
+// }
 
 
 export default {
     namespaced: true,
     state,
-    mutations
+    // mutations
 }

@@ -1,5 +1,6 @@
 
 
+import Vuex from "../vuex/store.js";
 let tools = [];
 
 let addCheackList = function(arr){
@@ -7,6 +8,11 @@ let addCheackList = function(arr){
         check(arr[i].formType);
     }
 };
+
+
+function alert(msg){
+    Vuex.commit('alert/SHOWAlERT',msg);
+}
 
 function check(type){
     let fn;
@@ -54,14 +60,11 @@ function check(type){
         break;
 
     }
-    console.log(tools);
-
 }
 
 function isNullStr(val){
     var s = false;
     if(val == ""){
-        console.log("kong ")
         s = false;
     } else {
         s = true;

@@ -1,6 +1,6 @@
 
 
-let alertShow = true;
+let alertShow = false;
 
 let alertMsg = "默认消息";
 

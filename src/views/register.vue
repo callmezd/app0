@@ -6,13 +6,18 @@
       </p>
       <div v-for="(item ,index) in list" v-bind:key="index">
 
+        <input v-if="item.formType == 'nomal'" class="ipt" type="text"  :id= "item.data" :placeholder="'请输入'+item.name" v-model="item.val" :maxlength="item.max">
 
-        <input v-if="!item.optionList" class="ipt" type="text"  :id= "item.data" :placeholder="'请输入'+item.name" v-model="item.val" :maxlength="item.max">
 
+
+      
 
         <select name="" v-if="item.optionList"   v-model="item.val" >
           <option v-for="(i ,idx) in item.optionList"   class="ipt" v-bind:key="idx"   :value="i.val">{{i.sex}}</option>
         </select>
+
+          <input v-if="item.formType == 'password-list'" class="ipt" type="password"  :id= "item.data+'0'" :placeholder="'请输入'+item.name" v-model="item.val" :maxlength="item.max">
+          <input v-if="item.formType == 'password-list'" class="ipt" type="password"  :id= "item.data+'1'" :placeholder="'请再次输入'+item.name" v-model="item.reval" :maxlength="item.max">
 
       </div>
     <div id="from-btn" @click="submit">
@@ -31,34 +36,39 @@ export default {
   data(){
     return{
       list:[
-        {name:"姓名",data:"name" , val:"朱丹",max:6,formType:"nomal",},
-        {name:"电话",data:"phone" , val:"15680717059",max:11,formType:"phone"} ,
-
-        {name:"邮箱",data:"email" ,val:"",formType:"email"},
-        // {name:"地址",data:"addr" ,val:""},
-        // {name:"性别",data:"sex",optionList:[{sex:"请选择性别",val:"-1"},{sex:"男",val:"1"},{sex:"女",val:"0"}] ,val:"请选择性别"} ,
+        // {name:"姓名",data:"name" , val:"z z",max:6,formType:"nomal"},
+        {name:"电话",data:"phone" , val:"15616111000",max:11,formType:"nomal",checkrule:"phone"},
+        // {name:"邮箱",data:"email" ,val:"",formType:"nomal",checkrule:"email"},
+        {name:"密码",data:"password" ,val:"",reval:"",formType:"password-list"},
+        // {name:"地址",data:"addr" ,val:"",formType:"nomal"},
+        // {name:"性别",data:"sex",optionList:[{sex:"请选择性别",val:"-1"},{sex:"男",val:"1"},{sex:"女",val:"0"}] ,val:"-1",formType:"radio"}
       ],
       name:"",
       phone:"",
+      ruleArr:[]
     }
   },
   mounted(){
-    tools.addCheackList(this.list);
+    var that = this;
+    that.ruleArr = tools.addCheackList(that.list);
   },
   methods:{
     submit(){
       var obj = {};
       var that = this;
       var succ = true;
-      for(var i = 0;i<this.list.length;i++){
-        if(!tools.tools[i](that.list[i].val,that.list[i].name)){
+      var fnArr = this.ruleArr;
+      var formData = that.list;
+      for(var i = 0;i<fnArr.length;i++){
+        if(!fnArr[i](formData[i].val,formData[i].name,formData[i].reval)){
           succ = false;
           break;
         };
         obj[this.list[i].data]=this.list[i].val;
       }
       if(succ) {
-
+      console.log("表单验证通过！")
+        
       untils.ajax("insertUserInfo",obj,function(e){
         console.log(e)
       }); 

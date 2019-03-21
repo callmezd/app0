@@ -3,7 +3,9 @@
   <div class="page  alert-page" v-show = "alertShow">
     <div class="alert" >
       <div id="msgbox">
-        <p>{{alertMsg}}</p>
+        <div id="msgwrap" class="word-centered">
+          <p>{{alertMsg}}</p>
+        </div>
       </div>
         <div class="btn" @click="hide"> 确定</div>
     </div>
@@ -62,6 +64,10 @@ export default {
   box-sizing: border-box;
   border-bottom: 1px solid;
 }
+#msgwrap{
+  height:100%;
+  width:100%;
+}
 #msgbox p{
   font-size: .4rem;
   line-height: .6rem;
@@ -70,7 +76,7 @@ export default {
 .btn{
   height: .7rem;
   line-height: .7rem;
-  font-size: .4rem;
+  font-size: .3rem;
   width: 100%;
   text-align: center;
 }

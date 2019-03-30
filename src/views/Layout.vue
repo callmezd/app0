@@ -7,12 +7,8 @@
     </transition>
     <div id="head-box">
        <img class="head" src="../../public/head.jpg" alt="" v-on:click="navState=!navState" >
-       <span style=" position: absolute;
-    z-index: 3;
-    top: 1%;
-    right: 7%;
-    color: white;">
-         {{navState}}
+       <span >
+        {{user.username}}
          </span>
     </div>
     <div id="nav">
@@ -34,6 +30,7 @@
 import Leftnav from "@/components/Leftnav.vue";
 import axios from "axios";
 import untils from "../utils/index.js";
+import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
 
 export default {
   name: "home",
@@ -53,6 +50,11 @@ export default {
         ]
       }
     }
+  },
+  computed:{
+       ...mapState('user', {
+          user: state => state.user,
+      })
   },
   methods: {
     hideNav(){
@@ -123,16 +125,22 @@ export default {
   height: 1rem;
   width: 1rem;
   border-radius: 0.5rem;
-  display: block;
+  display: inline-block;
   margin-left: 0rem;
 }
 #head-box {
+  display: flex;
+  justify-content: start;
+  align-items: center;
   height: 1rem;
   width: 10rem;
   background-color: blueviolet;
 }
 #left-main {
   background: #2c3e50;
+}
+#head-box span{
+  text-indent: 1em;
 }
 #nav {
   width: 100%;

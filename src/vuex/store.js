@@ -4,6 +4,7 @@ import Vuex from "vuex";
 import list from './mudules/list';
 import data from './mudules/data';
 import alert from './mudules/alert';
+import user from './mudules/user';
 
 import * as actions from './actions'
 
@@ -42,7 +43,7 @@ export default new Vuex.Store({
   modules:{
     data,
     list,
-    alert
+    alert,user
   }
 });
 

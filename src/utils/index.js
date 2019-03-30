@@ -2,7 +2,10 @@
 
 
 import axios from "axios";
-const baseUrl = "http://localhost:80/api/api2/api/api.php"
+const apiUrl = "http://api.local.com/";
+const apiVersion = "1.0/";
+
+const baseUrl = apiUrl+apiVersion+"users/";
 function ajax (type,data,cb) {
     var params = new URLSearchParams();
     if(data){
@@ -10,7 +13,7 @@ function ajax (type,data,cb) {
             params.append(i,data[i]);   
         };
     }
-    axios.post(baseUrl+"?type="+type,params)
+    axios.post(baseUrl+type,params)
     .then(res => {
         cb(res);
     }).catch(err => {

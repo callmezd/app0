@@ -1,18 +1,18 @@
 
 
-import Vuex from "../vuex/store.js";
+import alertObj from "../tools/alert.js";
+const alert = alertObj.alert;
 
 function addCheackList(arr){
     var tools = [];
+
     for(var i = 0;i<arr.length;i++){
         check(arr[i],tools);
     }
     return tools;
 };
 
-function alert(msg){
-    Vuex.commit('alert/SHOWAlERT',msg);
-}
+
 
 function check(item,tools){
     var type = item.formType;
@@ -21,6 +21,7 @@ function check(item,tools){
         case "nomal":
          fn =function(val,name){
             if(!isNullStr(val)) {
+                console.log(alert);
                 alert("请输入"+name);
                 return false;
             };
@@ -45,6 +46,16 @@ function check(item,tools){
                 alert("两次密码输入的不一样");
                 return false;
             }
+            return true;
+        }
+        tools.push(fn);
+        break;
+        case "password":
+        fn = function(val,name,reval){
+            if(!isNullStr(val)) {
+                alert("请输入密码");
+                return false;
+            };
             return true;
         }
         tools.push(fn);

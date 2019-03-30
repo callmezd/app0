@@ -4,3 +4,7 @@ export const RESESTLIST = 'list/RESESTLIST';
 
 export const SHOWAlERT = 'alert/SHOWAlERT';
 export const HIDEAELRT = 'alert/HIDEAELRT';
+
+
+export const UPDATEUSERINFO = 'user/update';
+

@@ -1,5 +1,6 @@
 <template>
   <div class="layout-index">
+
     <swiper :options="adSwiperOption" class="ad-swiper-slide">
       <swiper-slide v-for="(item,index) in ads" v-bind:key="index">
         <p>{{item}}</p>
@@ -90,7 +91,7 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
       }),
        ...mapState('alert', {
           alertShow: state => state.alertShow,
-      })
+      }),
 
     },
     data() {
@@ -114,9 +115,27 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
         10 - 3.5 - .9  -.8) + 'rem';
          this.$store.dispatch('SHOW');
          this.getList();
+      console.log("create");
+    },
+    beforeMount(){
+      this.toLogin();
+      console.log("mounted");
+    },
+    compiled() {
+      console.log('page index compiled')
+    },
+    mounted(){
+      // console.log(this.user)
     },
     methods: {
+
       ...mapActions(["pushlist",'resetlist']),
+      toLogin(){
+          var token = sessionStorage.getItem("token");
+          if(!token){
+              this.$router.push("/login");
+          }
+      },
       rand(a,b){
           var w = b-a;
           return parseInt(Math.random()*w+a , 10);
@@ -173,6 +192,12 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
       
     },
     beforeRouteEnter(to, from, next){
+    
+      // console.log(from)
+      // if(from.name!=null){
+      //   console.log(this);
+      //   this.toLogin();
+      // }
       var position ;
       if(!sessionStorage.position || from.name == null || from.name == 'index'){//当前页面刷新不需要切换位置
             console.log('------当前页面刷新不需要切换位置');
@@ -191,6 +216,8 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
       }
     },
     beforeRouteLeave(to,from,next){
+
+
         var position = this.$refs.scroller &&
             this.$refs.scroller.getPosition()&&
             this.$refs.scroller.getPosition().top;

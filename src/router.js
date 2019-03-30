@@ -10,6 +10,7 @@ import Notfind from "./views/Notfind.vue";
 import Detail from "./views/Detail.vue";
 import Loading from "./views/Loading.vue";
 import register from "./views/register.vue";
+import login from "./views/login.vue";
 
 
 Vue.use(Router);
@@ -21,8 +22,9 @@ Vue.use(Router);
   mode: "history", // history
   base: process.env.BASE_URL,
   routes: [
-    { path:'/',redirect:"/register"},
+    { path:'/',redirect:"/layout"},
     { path:'/register',name:"register",component:register},
+    { path:'/login',name:"login",component:login},
     { path:'/loading',name:"loading",component:Loading},
     {
       path: "/layout",

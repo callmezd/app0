@@ -16,11 +16,11 @@
       <router-link to="/layout/about">About</router-link>
     </div>
 
-      <transition name="bounce"  mode="in-out">
+      <!-- <transition name="bounce"  mode="in-out"> -->
         <keep-alive>
           <router-view />
         </keep-alive>
-      </transition>
+      <!-- </transition> -->
   </div>
 </template>
 

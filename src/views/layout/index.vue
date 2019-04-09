@@ -244,7 +244,7 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
 
  
 
-  ul li {
+ #layout-index ul li {
     text-align: left;
     font-size: 0.6rem;
     text-indent: .3rem;

@@ -19,5 +19,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-src/views/route-views/layout/index.vue
+# src/views/route-views/layout/index.vue
 .gitignore

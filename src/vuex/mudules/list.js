@@ -1,86 +1,66 @@
-const banner = [{
-        imageUrl: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3708759485,2703464663&fm=26&gp=0.jpg",
-        title: "y",
-        name: ""
-    },
-    {
-        imageUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2695047413,3283828312&fm=26&gp=0.jpg",
-        title: "y",
-        name: ""
-    },
-    {
-        imageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550147776228&di=717914dc28349f5a34c21f18d4bb65a3&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01cdc1592fac02a8012193a36a9fab.jpg%401280w_1l_2o_100sh.jpg",
-        title: "y",
-        name: ""
-    },
-    {
-        imageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550147776228&di=6479f67eeead4f9b74c5fc208edf7f8e&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F3522d49a0c889fef7859745baf89a8d8880c5c54f6e0-vu5doF_fw658",
-        title: "y",
-        name: ""
-    }
+const banner = [];
 
+const list = [];
+const lastList = [];
+
+const picUrl = "img/";
+
+const pei = [
+    "蒹葭苍苍，白露为霜。所谓伊人，在水一方。",
+    "溯洄从之，道阻且长。溯游从之，宛在水中央。",
+    "蒹葭萋萋，白露未晞。所谓伊人，在水之湄。",
+    "溯洄从之，道阻且跻。溯游从之，宛在水中坻。",
+    "蒹葭采采，白露未已。所谓伊人，在水之涘。",
+    "溯洄从之，道阻且右。溯游从之，宛在水中沚。"
 ];
 
-const list = [{
-        title: '标题1',
-        time: 1448518400000,
-        hot: 1,
-        id: 0,
-        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
-    },
-    {
-        title: '标题2',
-        time: 1455555500000,
-        hot: 122,
-        id: 1,
-        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
-    },
-    {
-        title: '标题3',
-        time: 1498518400000,
-        hot: 70,
-        id: 2,
-        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
-    },
-    {
-        title: '标题4',
-        time: 1558518400000,
-        hot: 50,
-        id: 3,
-        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
-    }
-];
+function rand(a, b) {
+    var w = b - a;
+    return parseInt(Math.random() * w + a, 10);
+}
 
-const lastList = [{
-        title: '标题1',
-        time: 1448518400000,
-        hot: 1,
-        id: 0,
-        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
-    },
-    {
-        title: '标题2',
-        time: 1455555500000,
-        hot: 122,
-        id: 1,
-        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
-    },
-    {
-        title: '标题3',
-        time: 1498518400000,
-        hot: 70,
-        id: 2,
-        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
-    },
-    {
-        title: '标题4',
-        time: 1558518400000,
-        hot: 50,
-        id: 3,
-        content: [1, 2, 5, 54, 5, 51, 2, 1, 5, 2, 1, 52215152, 12, 1215, 121, 2121]
-    }
-];
 
+
+
+function getName() {
+var result = [];
+    for (var i = 0; i < 5; i++) {
+        var ranNum = Math.ceil(Math.random() * 25);
+        result.push(String.fromCharCode(65 + ranNum));
+    }
+    return result.join("");
+}
+
+
+function createObj() {
+    var obj = {},
+        img = "";
+    var imgArr = [];
+    var randNum = rand(0, 12);
+    var pRand = pei[rand(0, 6)];
+    var discuss = [];
+    var detail = {
+        dislike: 0,
+        like: 100
+    };
+    for (var i = 0; i < randNum; i++) {
+        var randImg = rand(0, 12);
+        if (!obj[randImg]) {
+            obj[randImg] = true;
+            img = picUrl + randImg + '.jpg';
+            imgArr.push(img)
+        }
+    }
+    return {
+        data: {
+            username:getName(),
+            img: imgArr,
+            content: pRand
+        },
+        discuss,
+        detail,
+    };
+}
 
 const state = {
     banner,
@@ -91,13 +71,16 @@ const state = {
 
 const mutations = {
     SHOW(state, items) {
+
         // console.log("show");
     },
     PUSHLIST(state, items) {
         state.list.push(items);
     },
     RESESTLIST(state) {
-        state.list = lastList;
+        for (var i = 0; i < 10; i++) {
+            state.list.push(createObj());
+        }
     }
 };
 

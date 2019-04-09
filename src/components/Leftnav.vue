@@ -27,11 +27,10 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "left",
   props: ['leftnavdata',"navState"],
    methods: {
         hide() {
-            console.log('hideNav')
             this.$emit('hideNav');  //使用$emit()引入父组件中的方法
         }
    },

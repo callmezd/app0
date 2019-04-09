@@ -1,55 +1,48 @@
 <template>
   <div class="layout-index">
-
-    <swiper :options="adSwiperOption" class="ad-swiper-slide">
+    <!-- <swiper :options="adSwiperOption" class="ad-swiper-slide">
       <swiper-slide v-for="(item,index) in ads" v-bind:key="index">
         <p>{{item}}</p>
       </swiper-slide>
-    </swiper>
-
-    <swiper :options="swiperOption" class="banner-swiper-slide">
+    </swiper> -->
+    <!-- <swiper :options="swiperOption" class="banner-swiper-slide">
       <swiper-slide v-for="(item,index) in banner" v-bind:key="index">
         <img :src="item.imageUrl">
       </swiper-slide>
       <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-    </swiper>
-  <p>
-  </p>
-      <div id="sort" >
-
-         <div id="nomal-sort" data-id='nomal' ref='nomal'
-          v-bind:class="[active == 'nomal' ? 'active':'']" v-on:click="changeSortRule($event)">
-            默认
-        </div>
-
-        <!-- 升序 asc  降序 desc -->
-        <div id="time-sort" data-id='time' ref='time' 
-         v-bind:class="[active == 'time' ? 'active':'']" @click="changeSortRule($event)">
-            时间
-            <span v-show="activeObj.time" class="iconfont icon-paixu-shengxu" data-id='span'></span>
-            <span v-show="!activeObj.time" class="iconfont icon-paixu-jiangxu" data-id='span' ></span>
-        </div>
-
-        <div id="hot-sort" data-id='hot' ref='hot'
-        v-bind:class="[active == 'hot' ? 'active':'']" v-on:click="changeSortRule($event)">
-            热度
-            <span v-show="activeObj.hot" class="iconfont icon-paixu-shengxu" data-id='span'></span>
-            <span v-show="!activeObj.hot" class="iconfont icon-paixu-jiangxu" data-id='span'></span>
-        </div>
-      </div>
-      <div id="itembox" v-bind:style="{height:height}">
-
+    </swiper> -->
+      <!-- <div id="itembox" v-bind:style="{height:height}">
        <scroller :on-refresh="refresh" :on-infinite="infinite"  ref="scroller">
           <Indexitem v-for="(i,index) in list"   v-bind:myindex="index" v-bind:list="i" v-bind:key="index" />
        </scroller>
+      </div> -->
 
-      </div>
 
+      <div id="bg"></div>
+      <ul>
+        <li v-for="(item,index ) in list"  :key="index">
+          <div class="info">
+            <span>{{item.data.username}}</span>
+          </div>
+          <div class = "content">
+              {{item.data.content}}
+          </div>
+          <div class="piclist">
+              <img class="img-list" v-for="(img,idx ) in item.data.img"  :key="idx" src="../../assets/img/1.jpg" alt="">
+          </div>
+          <div class="detail">
+
+          </div>
+        </li>
+      </ul>
+      <imgShow src = "../../assets/img/1.jpg" state="flag" />
   </div>
 </template>
 
 <script>
 import Indexitem from "@/components/Indexitem.vue";
+import imgShow from "@/components/imgshow.vue";
+
 import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
 
   import {
@@ -63,23 +56,14 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
     components: {
       swiper,
       swiperSlide,
-      Indexitem
+      Indexitem,
+      imgShow
     },
     computed: {
       // 方式一
       // ...mapState({
       //     banner: state => state.list.banner,
-      //     list: state => state.list.list,
-      //     adSwiperOption: state => state.data.adSwiperOption,
-      //     swiperOption: state => state.data.swiperOption,
       // })
-      // ...mapState({
-      //     banner: state => state.list.banner,
-      //     list: state => state.list.list,
-      //     adSwiperOption: state => state.data.adSwiperOption,
-      //     swiperOption: state => state.data.swiperOption,
-      // }),
-
       // 方式二
        ...mapState('list', {
           banner: state => state.banner,
@@ -104,20 +88,11 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
         height: 0,
         noData: '',
         active:"nomal",
-        activeObj:{
-          'time': false,
-          'hot': false,
-        }
+        flag:true
       }
     },
-    created() {
-      this.height = ((document.documentElement.clientHeight / document.documentElement.clientWidth) *
-        10 - 3.5 - .9  -.8) + 'rem';
-         this.$store.dispatch('SHOW');
-         this.getList();
-    },
-    beforeMount(){
-      // this.toLogin();
+    mounted() {
+        this.$store.dispatch('resetlist');
     },
     methods: {
       ...mapActions(["pushlist",'resetlist']),
@@ -175,111 +150,43 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
         this.activeObj[id] = !this.activeObj[id];
         // this.list = sort(this.list,id,this.activeObj[id]);
       },
-       getList: function () {
-         console.log(this.$refs)
-      },
-      
-    },
-    beforeRouteEnter(to, from, next){
-      // console.log(from)
-      // if(from.name!=null){
-      //   console.log(this);
-      //   this.toLogin();
-      // }
-      var position ;
-      if(!sessionStorage.position || from.name == null || from.name == 'index'){//当前页面刷新不需要切换位置
-            console.log('------当前页面刷新不需要切换位置');
-            position = 0;
-            next();
-      }else{
-          console.log('------滚动');
-            position = sessionStorage.position;
-             next(vm => {
-              if(vm && vm.$refs.scroller){//通过vm实例访问this
-                setTimeout(function () {
-                  vm.$refs.scroller.scrollTo(0, sessionStorage.position, false);
-                },15)//同步转异步操作
-              }
-            })
-      }
-    },
-    beforeRouteLeave(to,from,next){
-        var position = this.$refs.scroller &&
-        this.$refs.scroller.getPosition()&&
-        this.$refs.scroller.getPosition().top;
-        sessionStorage.position = position;
-        next();
     }
   };
 </script>
 
 <style lang="less">
-  .swiper-slide img {
-    width : 10rem;
-    height : 3rem;
-  }
-
-  .ad-swiper-slide {
-    height : 0.5rem;
-    background : white;
-  }
-
-  .banner-swiper-slide {
-    height : 3rem;
-  }
-
-  .swiper-slide p {
-    width : 10rem;
-    text-align : left;
-    height : 0.5rem;
-  }
-
-  #itembox {
-    height : 5rem;
-    overflow : auto;
-    width : 100%;
-    display : block;
-    position : relative;
-  }
-
- 
-
- #layout-index ul li {
-    text-align: left;
-    font-size: 0.6rem;
-    text-indent: .3rem;
-    padding: .03rem;
-    border: 1px solid;
-    box-sizing: border-box;
-    width: 9.4rem;
-    margin:.3rem;
-  }
-
-
- #sort{
-    height: .8rem;
-    background: rgba(32, 115, 148, 0.6);
-    color: white;
-    div{
-      width: 3.3333rem;
-      height: .8rem;
-      line-height: .8rem;
-      float: left;
-      text-align: center;
+  .layout-index{
+    overflow: auto;
+    margin-bottom: .9rem;
+    #bg{
+      background: rgba(1, 2, 32, .3);
+      width: 10rem;
+      height: 4rem;
     }
-    div.active{
-      color: red;
+    ul{
+      li{
+        overflow: hidden;
+        width: 10rem;
+        background: #ccc;
+        padding: .3rem;
+        box-sizing: border-box;
+        border-bottom: .013333rem solid #fff;
+      .img-list{
+          display: block;
+          height: 1rem;
+          width: 1rem;
+          float: left;
+          margin: .2rem;
+        }
+      }
     }
-  }
-
- .layout-index{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    height: calc(100% - 2.4rem);
-    overflow: hidden;
-  }
- 
+    .lide{
+      height: 10rem;
+      border: 1px solid;
+      box-sizing: border-box;
+    }
+  
+}
  
 
 </style>

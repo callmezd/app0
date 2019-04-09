@@ -22,7 +22,7 @@ export default {
   computed:{
     // ...mapState('alert', {
     //   alertShow: state => state.alert,
-    // })
+    // }),
       ...mapState({
           alertShow: state => state.alert.alertShow,
           alertMsg: state => state.alert.alertMsg,

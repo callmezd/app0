@@ -29,13 +29,12 @@
 
 
 export default {
-  name: "HelloWorld",
+  name: "item",
   props: ["list",'myindex'],
   mounted(){
   },
    methods: {
         hide() {
-            console.log('hideNav')
             this.$emit('hideNav');  //使用$emit()引入父组件中的方法
         }
    },

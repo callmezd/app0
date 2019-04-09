@@ -5,11 +5,9 @@
           <Leftnav v-if="navState" v-bind:leftnavdata="leftnavdata" v-bind:navState="navState" v-on:hideNav='hideNav'/>
         </keep-alive>
     </transition>
-    <div id="head-box">
-        <img class="head" src="" alt="" v-on:click="navState=!navState" >
-        <input id="search" value="" type="text" />
-        <span id="search-btn"><i class="iconfont icon-htmal5icon25"></i></span>
-    </div>
+
+  
+    
     <div id="nav">
       <router-link to="/layout/index">Home</router-link> |
       <router-link to="/layout/mine">mine</router-link> |
@@ -31,6 +29,11 @@ import axios from "axios";
 import untils from "../utils/index.js";
 import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
 
+  // <div id="head-box">
+  //       <img class="head" src="" alt="" v-on:click="navState=!navState" >
+  //       <input id="search" value="" type="text" />
+  //       <span id="search-btn"><i class="iconfont icon-htmal5icon25"></i></span>
+  //   </div>
 export default {
   name: "home",
   components: {

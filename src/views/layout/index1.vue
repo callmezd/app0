@@ -115,20 +115,11 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
         10 - 3.5 - .9  -.8) + 'rem';
          this.$store.dispatch('SHOW');
          this.getList();
-      console.log("create");
     },
     beforeMount(){
-      this.toLogin();
-      console.log("mounted");
-    },
-    compiled() {
-      console.log('page index compiled')
-    },
-    mounted(){
-      // console.log(this.user)
+      // this.toLogin();
     },
     methods: {
-
       ...mapActions(["pushlist",'resetlist']),
       toLogin(){
           var token = sessionStorage.getItem("token");
@@ -143,9 +134,7 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
       infinite(done) {
         // 没有数据的处理
         var s= this;
-        setInterval(function(){
-          console.log(s.alertShow);
-        } ,1000)
+ 
         if (this.noData) {
             setTimeout(()=>{
                 this.$refs.scroller.finishInfinite(2);
@@ -192,7 +181,6 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
       
     },
     beforeRouteEnter(to, from, next){
-    
       // console.log(from)
       // if(from.name!=null){
       //   console.log(this);
@@ -216,11 +204,9 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
       }
     },
     beforeRouteLeave(to,from,next){
-
-
         var position = this.$refs.scroller &&
-            this.$refs.scroller.getPosition()&&
-            this.$refs.scroller.getPosition().top;
+        this.$refs.scroller.getPosition()&&
+        this.$refs.scroller.getPosition().top;
         sessionStorage.position = position;
         next();
     }
@@ -284,14 +270,13 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
     div.active{
       color: red;
     }
-    
   }
 
  .layout-index{
     position: absolute;
     height: 100%;
     width: 100%;
-    height: calc(100% - 1.9rem);
+    height: calc(100% - 2.4rem);
     overflow: hidden;
   }
  

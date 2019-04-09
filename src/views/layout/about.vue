@@ -11,7 +11,7 @@
   height: 100%;
   width: 100%;
   background: rgba(1, 5, 2, .3);
-  height: calc(100% - 1.9rem);
-}
+    height: calc(100% - 2.4rem);
 
+}
 </style>

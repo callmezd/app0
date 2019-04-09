@@ -6,10 +6,9 @@
         </keep-alive>
     </transition>
     <div id="head-box">
-       <img class="head" src="../../public/head.jpg" alt="" v-on:click="navState=!navState" >
-       <span >
-        {{user.username}}
-         </span>
+        <img class="head" src="" alt="" v-on:click="navState=!navState" >
+        <input id="search" value="" type="text" />
+        <span id="search-btn"><i class="iconfont icon-htmal5icon25"></i></span>
     </div>
     <div id="nav">
       <router-link to="/layout/index">Home</router-link> |
@@ -42,7 +41,7 @@ export default {
       run:false,
       navState:false,
       leftnavdata:{
-        userInfo:{nick:'nick',headImg:require('../../public/head.jpg')},
+        userInfo:{nick:'nick',headImg:require('../assets/head.jpg')},
         allNav:[
          {desc:'base',name:'base',navList: [{name:'我的收藏',icon:'iconfont icon-shoucang'},{name:'我的赞',icon:'iconfont icon-zan'}]},
          {desc:'hot',name:'hot',navList: [{name:'热点1',icon:'iconfont icon-tubiao-'},{name:'新闻',icon:'iconfont icon-xinwen'}]},
@@ -62,21 +61,20 @@ export default {
     }
   },
   mounted () {
-    untils.ajax("test0",{
-      type:"test0"
-    },function(e){
-
-    });
+    // untils.ajax("test0",{
+    //   type:"test0"
+    // },function(e){
+    // });
   }
 };
 </script>
 
 <style lang="less">
-
 .run {
   animation: ss 0.3s ease-in-out;
   animation-fill-mode: forwards;
 }
+
 
 
 #left-main {
@@ -112,7 +110,6 @@ export default {
     left: 0rem;
   }
 }
-
 @keyframes s2 {
   form {
     left: 0rem;
@@ -127,20 +124,42 @@ export default {
   border-radius: 0.5rem;
   display: inline-block;
   margin-left: 0rem;
+  border:.013333rem solid;
 }
 #head-box {
   display: flex;
   justify-content: start;
   align-items: center;
-  height: 1rem;
-  width: 10rem;
-  background-color: blueviolet;
+  height: 1.5rem;
+  padding: .25rem;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: white;
+  border-bottom:.013333rem solid #6c6c6c;
 }
 #left-main {
   background: #2c3e50;
 }
-#head-box span{
-  text-indent: 1em;
+
+#search{
+  text-indent:1em;
+  border:.013333rem solid;
+  height:.466667rem;
+  margin-left:.6rem;
+  display:block;
+  border-radius:2em;
+  width:4rem;
+}
+
+#search-btn{
+  position:absolute;
+  left:5.45rem;
+  width:.4rem;
+  height:.4rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:2em;
 }
 #nav {
   width: 100%;
@@ -150,7 +169,8 @@ export default {
   justify-content: center;
   position: absolute;
   bottom: 0;
-  background-color: blueviolet;
+  box-sizing:border-box;
+  border-top:.013333rem solid;
   z-index: 1;
   a {
     font-weight: bold;

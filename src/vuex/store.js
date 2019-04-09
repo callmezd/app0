@@ -7,14 +7,6 @@ import alert from './mudules/alert';
 import user from './mudules/user';
 
 import * as actions from './actions'
-
-
-
-
-
-
-
-
 import { SHOWAlERT } from './mutation_types'
 import { HIDEAELRT } from './mutation_types'
 

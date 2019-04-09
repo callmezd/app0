@@ -15,7 +15,7 @@
   export default {
     data(){
       return {
-        msg:"请撒大声地是多少是的"
+        msg:""
       }
     },
     components: {

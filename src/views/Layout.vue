@@ -9,12 +9,13 @@
   
     
     <div id="nav">
-      <router-link to="/layout/index">Home</router-link> |
-      <router-link to="/layout/mine">mine</router-link> |
-      <router-link to="/layout/about">About</router-link>
+      <router-link to="/layout/index" v-on:test="test">1</router-link> |
+      <router-link to="/layout/mine">2</router-link> |
+      <router-link to="/layout/about">3</router-link>
     </div>
 
       <!-- <transition name="bounce"  mode="in-out"> -->
+          
         <keep-alive>
           <router-view />
         </keep-alive>
@@ -29,11 +30,6 @@ import axios from "axios";
 import untils from "../utils/index.js";
 import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
 
-  // <div id="head-box">
-  //       <img class="head" src="" alt="" v-on:click="navState=!navState" >
-  //       <input id="search" value="" type="text" />
-  //       <span id="search-btn"><i class="iconfont icon-htmal5icon25"></i></span>
-  //   </div>
 export default {
   name: "home",
   components: {
@@ -61,14 +57,15 @@ export default {
   methods: {
     hideNav(){
       this.navState = false;
+    },
+    test(){
+      console.log(1);
     }
   },
   mounted () {
-    // untils.ajax("test0",{
-    //   type:"test0"
-    // },function(e){
-    // });
+ 
   }
+  
 };
 </script>
 
@@ -77,7 +74,10 @@ export default {
   animation: ss 0.3s ease-in-out;
   animation-fill-mode: forwards;
 }
-
+router-view{
+  position: absolute;
+  z-index: 1;
+}
 
 
 #left-main {
@@ -165,6 +165,7 @@ export default {
   border-radius:2em;
 }
 #nav {
+  background: red;
   width: 100%;
   height: 0.9rem;
   line-height: 0.9rem;

@@ -2,9 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 import Layout from "./views/Layout.vue";
 
-import layoutIndex from "./views/layout/index.vue";
-import layoutMine from "./views/layout/mine.vue";
-import layoutAbout from "./views/layout/about.vue";
+import layoutIndex from "./views/index.vue";
+import layoutMine from "./views/mine.vue";
+import layoutAbout from "./views/about.vue";
 
 import Notfind from "./views/Notfind.vue";
 import Detail from "./views/Detail.vue";

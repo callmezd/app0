@@ -18,8 +18,10 @@
       </div> -->
 
 
-      <div id="bg"></div>
-      <ul>
+      <div id="bg">
+        {{flag}}
+      </div>
+      <ul  @click="test">
         <li v-for="(item,index ) in list"  :key="index">
           <div class="info">
             <span>{{item.data.username}}</span>
@@ -28,14 +30,15 @@
               {{item.data.content}}
           </div>
           <div class="piclist">
-              <img class="img-list" v-for="(img,idx ) in item.data.img"  :key="idx" src="../../assets/img/1.jpg" alt="">
+              <img class="img-list" v-for="(img,idx ) in item.data.img"  @click="showImg(img)"  :key="idx" :src="img" alt="">
           </div>
           <div class="detail">
 
           </div>
         </li>
       </ul>
-      <imgShow src = "../../assets/img/1.jpg" state="flag" />
+
+      <imgShow :src = "nowimg" :state1="flag" v-on:closeImg='closeImg' />
   </div>
 </template>
 
@@ -88,7 +91,10 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
         height: 0,
         noData: '',
         active:"nomal",
-        flag:true
+        flag:false,
+        nowimg:""
+
+        
       }
     },
     mounted() {
@@ -102,9 +108,23 @@ import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
               this.$router.push("/login");
           }
       },
+      test(){
+        console.log(1)
+            this.$emit('test');  
+      },
       rand(a,b){
           var w = b-a;
           return parseInt(Math.random()*w+a , 10);
+      },
+      showImg(e){
+        console.log(e);
+        this.nowimg = e;
+        this.flag = true;
+
+      },
+      closeImg(){
+        console.log(1111)
+        this.flag = false;
       },
       infinite(done) {
         // 没有数据的处理

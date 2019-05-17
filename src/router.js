@@ -3,14 +3,18 @@ import Router from "vue-router";
 import Layout from "./views/Layout.vue";
 
 import layoutIndex from "./views/index.vue";
-import layoutMine from "./views/mine.vue";
-import layoutAbout from "./views/about.vue";
+import layoutMine from "./views/Mine.vue";
+import layoutAbout from "./views/About.vue";
 
 import Notfind from "./views/Notfind.vue";
 import Detail from "./views/Detail.vue";
 import Loading from "./views/Loading.vue";
 import register from "./views/register.vue";
 import login from "./views/login.vue";
+
+
+
+import Home from "./views/Home.vue";
 
 Vue.use(Router);
 
@@ -21,7 +25,9 @@ const baseLink = ""
   mode: "hash", // history
   base: process.env.BASE_URL,
   routes: [
-    { path:baseLink+'/',redirect:"/layout"},
+    { path:baseLink+'/',redirect:"/newpage"},
+    { path:baseLink+'/newpage',name:"home",component:Home},
+    
     { path:baseLink+'/register',name:"register",component:register},
     { path:baseLink+'/login',name:"login",component:login},
     { path:baseLink+'/loading',name:"loading",component:Loading},

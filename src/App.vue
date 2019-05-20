@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-          <router-view />
+      <router-view />
   </div>
 </template>
 
@@ -17,7 +17,10 @@ export default {
 
 <style>
 @import "./style/base.less";
-#app {
-
+#app,html,body{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
+
 </style>

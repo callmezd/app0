@@ -12,6 +12,9 @@ import Loading from "./views/Loading.vue";
 import register from "./views/register.vue";
 import login from "./views/login.vue";
 
+import edit from "./views/edit.vue";
+
+
 
 
 import Home from "./views/Home.vue";
@@ -25,8 +28,9 @@ const baseLink = ""
   mode: "hash", // history
   base: process.env.BASE_URL,
   routes: [
-    { path:baseLink+'/',redirect:"/newpage"},
+    { path:baseLink+'/',redirect:"/edit"},
     { path:baseLink+'/newpage',name:"home",component:Home},
+    { path:baseLink+'/edit',name:"edit",component:edit},
     
     { path:baseLink+'/register',name:"register",component:register},
     { path:baseLink+'/login',name:"login",component:login},

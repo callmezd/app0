@@ -3,8 +3,6 @@ import Router from "vue-router";
 import Layout from "./views/Layout.vue";
 
 import layoutIndex from "./views/index.vue";
-import layoutMine from "./views/Mine.vue";
-import layoutAbout from "./views/About.vue";
 
 import Notfind from "./views/Notfind.vue";
 import Detail from "./views/Detail.vue";
@@ -42,8 +40,7 @@ const baseLink = ""
       children:[
         {path:baseLink+'/',redirect:"index"},
         {name: 'index',path: 'index',component: layoutIndex, meta: { requiresAuth: true }},
-        {name: 'mine',path: 'mine',component: layoutMine},
-        {name: 'about',path: 'about',component: layoutAbout}
+        // {name: 'about',path: 'about',component: layoutAbout}
       ]
     },
     { path: baseLink+"/detail",name: "detail",component: Detail},

@@ -1,17 +1,11 @@
 <template>
   <div class="">
-   
    <el-row>
      <h2>NEW NOTE</h2>
      <el-col :span="18" :offset="3"  >
         <textarea id="editor" placeholder="这里输入内容" autofocus>
         </textarea>  
-
      </el-col>
-
-  
-
-
 
      <el-col :span="18" :offset="3" class="list" >
        <p color="">常用标签</p>
@@ -34,15 +28,13 @@
     >
     </el-input>
     <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
-
-
-    <el-cascader
-  :options="optionsWithDisabled"
-></el-cascader>
+  
 
 
     </el-col>
-
+    <el-col :span="18" :offset="3" class="group" >
+      <el-cascader :options="group"></el-cascader>
+    </el-col>
 
 
 
@@ -62,56 +54,21 @@
 
 <script>
 import Simditor from 'simditor';
+import {mapGetters,mapState,mapActions } from 'vuex'; //先要引入
+
+
 export default {
   data(){
     return {
        dynamicTags: ['标签一', '标签二', '标签三'],
         inputVisible: false,
         inputValue: '',
-         optionsWithDisabled: [
-           {
-          value: 'zhinan',
-          label: '指南',
-          disabled: false,
-          children: [{
-            value: 'shejiyuanze',
-            label: '设计原则',
-            children: [{
-              value: 'kekong',
-              label: '可控'
-            }]
-          }, {
-            value: 'daohang',
-            label: '导航',
-            children: [{
-              value: 'cexiangdaohang',
-              label: '侧向导航'
-            }]
-          }]
-        }, {
-          value: 'zujian',
-          label: '组件',
-          children: [
-            {
-            value: 'basic',
-            label: 'Basic',
-          },  {
-            value: 'others',
-            label: 'Others',
-            children: [{
-              value: 'dialog',
-              label: 'Dialog 对话框'
-            }]
-          }]
-        }, {
-          value: 'ziyuan',
-          label: '资源',
-          children: [{
-            value: 'jiaohu',
-            label: '组件交互文档'
-          }]
-        }]
     }
+  },
+  computed:{
+    ...mapState('group', {
+      group: state => state.group,
+    }),
   },
   mounted() {
     var that = this;
@@ -133,10 +90,8 @@ export default {
       //optional options
     });
     this.editor.on("valuechanged",function(e,src){
-     
       var v = that.editor.getValue();
       that.$refs.box.innerHTML=v;
-      console.log(that.$refs)
     })
   },
   methods:{
@@ -170,8 +125,7 @@ export default {
   height: 100%;
   width: 100%;
   background: rgba(1, 5, 2, .3);
-    height: calc(100% - 2.4rem);
-
+  height: calc(100% - 2.4rem);
 }
 .list{
   margin-top: 15px;
@@ -195,5 +149,8 @@ export default {
   }
   #box{
     display: block
+  }
+  .group{
+    margin-top: 60px;
   }
 </style>

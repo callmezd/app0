@@ -5,17 +5,12 @@ import list from './mudules/list';
 import data from './mudules/data';
 import alert from './mudules/alert';
 import user from './mudules/user';
+import group from './mudules/groupData';
+
 
 import * as actions from './actions'
 import { SHOWAlERT } from './mutation_types'
 import { HIDEAELRT } from './mutation_types'
-
-
-console.log(
-  {SHOWAlERT}
-);
-
-
 
 
 
@@ -35,7 +30,9 @@ export default new Vuex.Store({
   modules:{
     data,
     list,
-    alert,user
+    alert,
+    user,
+    group
   }
 });
 

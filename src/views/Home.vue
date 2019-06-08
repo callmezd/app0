@@ -1,7 +1,6 @@
 <template>
     <div>
         <el-row>
-            {{routerPath}}
             <el-col :span="18" :offset="3" class="hidden-xs-only" >
             <el-menu :default-active="activeIndex" class="el-menu-demo"  mode="horizontal" @select="handleSelect">
             <el-menu-item index="1">首页</el-menu-item>
@@ -158,9 +157,9 @@
             handleSelect(key, keyPath) {
                 var e = keyPath.length == 1?0:1;
                 if(routeData[keyPath[e]]){
-                this.showSamllNav = false;
-                console.log(routeData[keyPath[e]])
-                this.routerPath = routeData[keyPath[e]].path
+                    this.showSamllNav = false;
+                    console.log(routeData[keyPath[e]])
+                    this.routerPath = routeData[keyPath[e]].path
                 }
             },
             handleClose(key, keyPath) {

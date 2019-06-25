@@ -36,17 +36,12 @@
       <el-cascader :options="group"></el-cascader>
     </el-col>
 
-
-
-
      <el-col class="list" :span="18" :offset="3"  >
     <el-button type="warning" @click="delAllTag">删除所有标签</el-button>
     <el-button type="primary">提交</el-button>
     </el-col>
    </el-row>
-        <p>
-         预览
-       </p>
+        <p>预览</p>
     <div ref="box" class="editor-style"></div>
   </div>
 </template>
@@ -91,6 +86,7 @@ export default {
     });
     this.editor.on("valuechanged",function(e,src){
       var v = that.editor.getValue();
+      console.log(v)
       that.$refs.box.innerHTML=v;
     })
   },
@@ -112,6 +108,7 @@ export default {
         if (inputValue) {
           this.dynamicTags.push(inputValue);
         }
+        console.log(inputValue)
         this.inputVisible = false;
         this.inputValue = '';
     }

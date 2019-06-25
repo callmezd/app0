@@ -5,12 +5,13 @@ import Layout from "./views/Layout.vue";
 import layoutIndex from "./views/index.vue";
 
 import Notfind from "./views/Notfind.vue";
-import Detail from "./views/Detail.vue";
+// import Detail from "./views/Detail.vue";
 import Loading from "./views/Loading.vue";
 import register from "./views/register.vue";
 import login from "./views/login.vue";
 
 import edit from "./views/edit.vue";
+import detail from "./views/detail.vue";
 
 
 
@@ -26,10 +27,11 @@ const baseLink = ""
   mode: "hash", // history
   base: process.env.BASE_URL,
   routes: [
+
     { path:baseLink+'/',redirect:"/edit"},
     { path:baseLink+'/newpage',name:"home",component:Home},
     { path:baseLink+'/edit',name:"edit",component:edit},
-    
+    { path:baseLink+'/detail',name:"detail",component:detail},
     { path:baseLink+'/register',name:"register",component:register},
     { path:baseLink+'/login',name:"login",component:login},
     { path:baseLink+'/loading',name:"loading",component:Loading},
@@ -40,11 +42,10 @@ const baseLink = ""
       children:[
         {path:baseLink+'/',redirect:"index"},
         {name: 'index',path: 'index',component: layoutIndex, meta: { requiresAuth: true }},
-        // {name: 'about',path: 'about',component: layoutAbout}
       ]
     },
-    { path: baseLink+"/detail",name: "detail",component: Detail},
-    { path: baseLink+"/not-find",name: "not-find",component: Notfind},
+    // { path: baseLink+"/detail",name: "detail",component: Detail},
+    { path: baseLink+"/   ",name: "not-find",component: Notfind},
     { path: "*",redirect: "/not-find"}
   ],
   scrollBehavior(to, from, savedPosition){

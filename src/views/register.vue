@@ -109,7 +109,7 @@ export default {
 @import '../style/mybase.less';
 
 .from-page{
-  background: url("../assets/bg.jpg") no-repeat center;
+  background: url("../assets/bg1.jpg") no-repeat center;
   background-size:cover; 
 }
 
